@@ -1,10 +1,10 @@
 #version 150
 
 const vec3 ROTATION_AXIS = normalize(vec3(1));
-const float ROTATION_SPEED = 5000.0;
+const float ROTATION_SPEED = 500.0;
 const float EPSILON = 0.001;
-const float MOON_SIZE = 7;
-const float SUN_SIZE = 10;
+const float MOON_SIZE = 5;
+const float SUN_SIZE = 9;
 
 uniform sampler2D Sampler0;
 
@@ -72,27 +72,27 @@ void main() {
             } else if (abs(dot(normal, vec3(0, 0, 1))) > 1.0 - EPSILON) {
                 faceTexCoord = hitPoint.xy;
             }
-            vec2 phaseTexCoord = floor(texCoord0 * vec2(4, 2));
             faceTexCoord = faceTexCoord / size / 8 - 0.5;
             if (id > 1.5) {
+                vec2 phaseTexCoord = floor(texCoord0 * vec2(4, 2));
                 float facing = dot(normal, vec3(1, 0, 0));
-                if ((texCoord0.x < 0.5 || texCoord0.x > 0.75)) {
+                if ((texCoord0.x > 0.25)) {
                     if (facing > 1.0 - EPSILON) {
                         if (texCoord0.y > 0.5) {
-                            phaseTexCoord = vec2(2, 0);
+                            phaseTexCoord = vec2(0, 0);
                         } else {
-                            phaseTexCoord = vec2(2, 1);
+                            phaseTexCoord = vec2(0, 1);
                         }
                     } else if (facing < -1.0 + EPSILON) {
                         if (texCoord0.y > 0.5) {
-                            phaseTexCoord = vec2(2, 1);
+                            phaseTexCoord = vec2(0, 1);
                         } else {
-                            phaseTexCoord = vec2(2, 0);
+                            phaseTexCoord = vec2(0, 0);
                         }
                     }
                 }
-                faceTexCoord = ((faceTexCoord + 1.0)) * vec2(0.25, 0.5) - 0.5;
-                faceTexCoord += floor(phaseTexCoord) / vec2(4, 2);
+                faceTexCoord = faceTexCoord;
+                faceTexCoord = (phaseTexCoord + faceTexCoord + 1) / vec2(4, 2);
             }
             fragColor = texture(Sampler0, faceTexCoord) * ColorModulator;
         } else {
