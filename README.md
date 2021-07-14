@@ -12,5 +12,6 @@
 
 (The Sun and Moon rotates, but it's hard to show using images)
 
-![example1](images/example1.png)
-![example2](images/example2.png)
+![moon](images/moon.gif)
+
+![sun](images/sun.gif)
