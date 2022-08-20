@@ -8,9 +8,7 @@
  2. Extract the contents of the zip inside your resourcepacks folder
  3. Select the resourcepack ingame
  
-## Examples
-
-(The Sun and Moon rotates, but it's hard to show using images)
+## Example
 
 ![moon](images/moon.gif)
 
